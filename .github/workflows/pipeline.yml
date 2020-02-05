@@ -13,6 +13,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+    - name: Startup test database instance
+      run: sudo service mysql start
+    - name: Create test database
+      run: |
+        mysql -uroot -proot < databases/tracker/create_databases.sql
+        ./gradlew testMigrate
     - name: Make gradlew executable
       run: chmod +x ./gradlew
     - name: Build with Gradle
@@ -67,7 +73,9 @@ jobs:
       run: chmod +x scripts/migrate-databases.sh
     - name: Migate tracker-database
       run: |
-        cf login -a "$CF_API_URL" -o "$CF_ORG" -s "$CF_SPACE" -u "$CF_USERNAME" -p "$CF_PASSWORD"
+        cf api "$CF_API_URL"
+        cf auth
+        cf target -o "$CF_ORG" -s "$CF_SPACE"
         scripts/migrate-databases.sh pal-tracker .
       env:
         CF_API_URL: ${{ secrets.CF_API_URL }}
