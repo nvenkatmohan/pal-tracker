@@ -16,7 +16,7 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public TimeEntry find(long timeEntryId) {
+    public TimeEntry find(Long timeEntryId) {
         return this.timeEntryMap.get(timeEntryId);
     }
 
@@ -29,7 +29,7 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public TimeEntry update(long timeEntryId, TimeEntry timeEntry) {
+    public TimeEntry update(Long timeEntryId, TimeEntry timeEntry) {
 
         if(timeEntryMap.containsKey(timeEntryId)) {
             timeEntry.setId(timeEntryId);
@@ -41,7 +41,7 @@ public class InMemoryTimeEntryRepository implements TimeEntryRepository {
     }
 
     @Override
-    public void delete(long timeEntryId) {
+    public void delete(Long timeEntryId) {
         timeEntryMap.remove(timeEntryId);
     }
 }

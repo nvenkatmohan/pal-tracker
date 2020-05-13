@@ -4,6 +4,8 @@ applications:
     path: build/libs/pal-tracker.jar
     routes: 
     - route: pal-tracker-73f03c93-d359-4118-abdb-2797b1a4d057.cfapps.io
+    services:
+    - tracker-database
     env:
       WELCOME_MESSAGE: Hello from the review environment
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
